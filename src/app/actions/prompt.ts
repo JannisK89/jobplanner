@@ -1,13 +1,24 @@
-import aiModel from '../lib/aiModel'
+import OpenAI from 'openai'
 
-export default async function getAiPlan() {
-  const prompt = `You are a job guidance councellor and you are creating a plan for a person on how to get a job as quickly as possible. Keep it Professional.
+const openai = new OpenAI()
 
-The person wants to work with the following and has education and work experience as stated:
-  Front End Developer - Education: Yes - Work Experience - Yes
-  DevOps Engineer - Education: No - Work Experience - Yes
-  Scrum Master - Education: No - Work Experience - No
-  `
-  const result = await aiModel.generateContent(prompt)
-  return result.response.text()
+async function generateText() {
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: 'system',
+        content:
+          'You are here to help people create a plan on how to find a job. Answer in plain text and keep the answers short. Only answer questions regarding job hunting.',
+      },
+      {
+        role: 'user',
+        content:
+          'I am looking to work as a software engineer. What should I do to find a job?',
+      },
+    ],
+    model: 'gpt-3.5-turbo',
+  })
+  return completion.choices[0].message.content
 }
+
+export default generateText
