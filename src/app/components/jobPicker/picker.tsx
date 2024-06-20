@@ -1,14 +1,19 @@
-'use client'
+import { JobInfo } from '@/app/types/types'
+import Job from './job'
 import { useState } from 'react'
-import { JobInfo } from '../types/types'
 
-export default function FilterList({ jobs }: { jobs: JobInfo[] }) {
+type Props = {
+  jobs: JobInfo[]
+  addJob: (jobs: JobInfo) => void
+}
+
+export default function Picker({ jobs, addJob }: Props) {
+  const [filter, setFilter] = useState('')
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value)
   }
-  const [filter, setFilter] = useState('')
   return (
-    <div className="bg-white p-4 shadow  flex flex-col">
+    <div className="bg-white w-1/2 mr-4 p-4 shadow rounded flex flex-col">
       <div className="flex flex-col gap-2 ">
         <label className="text-lg" htmlFor="filter">
           Filter by job title
@@ -21,17 +26,15 @@ export default function FilterList({ jobs }: { jobs: JobInfo[] }) {
           id="filter"
         />
       </div>
-      <div className="overflow-auto h-72 ">
+      <ul className="overflow-auto h-72 ">
         {jobs
           .filter((job) => {
             return job.title.toLowerCase().includes(filter.toLowerCase())
           })
           .map((job) => (
-            <p className="text-lg shadow p-2 hover:bg-gray-200" key={job.id}>
-              {job.title}
-            </p>
+            <Job key={job.id} job={job} clickHandler={addJob} type="add" />
           ))}
-      </div>
+      </ul>
     </div>
   )
 }
