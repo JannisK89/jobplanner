@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { JobInfo } from './types/types'
-import FilterList from './components/filterList'
+import FilterList from './components/jobPicker/filterList'
+import Input from './components/input'
 
 type Taxonomy = {
   'taxonomy/id': string
@@ -24,21 +24,14 @@ export default async function Home() {
   const jobInfo = await fetchJobData()
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-14">
-      <div className="w-full max-w-lg text-sm flex flex-col gap-4 ">
-        <Link
-          className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded shadow"
-          href="/users"
-        >
-          Go To Users
-        </Link>
-        <Link
-          className="p-4 bg-blue-600 hover:bg-blue-700 text-white rounded shadow"
-          href="/users/add"
-        >
-          Go To Add Users
-        </Link>
+      <form className="w-full max-w-5xl p-14 text-sm flex flex-col gap-4 ">
+        <h1 className="text-4xl font-bold">Skapa ny plan</h1>
+        <div className="flex gap-2 my-4">
+          <Input label="Förnamn" placeholder="Förnamn" />
+          <Input label="Efternmamn" placeholder="Efternman" />
+        </div>
         <FilterList jobs={jobInfo} />
-      </div>
+      </form>
     </main>
   )
 }
