@@ -1,4 +1,6 @@
 import { JobInfo } from '@/app/types/types'
+import clsx from 'clsx'
+
 type Props = {
   job: JobInfo
   type: 'add' | 'remove'
@@ -11,11 +13,15 @@ export default function Job({ job, type, clickHandler }: Props) {
       <p> {job.title} </p>
       <button
         onClick={() => clickHandler(job)}
-        className="ml-2 bg-blue-500 hover:bg-blue-400 text-white p-1 px-3 rounded text-sm"
+        className={clsx(
+          'ml-2  text-white p-1 px-3 rounded text-sm',
+          type === 'add' && 'bg-blue-500 hover:bg-blue-700',
+          type === 'remove' && 'bg-red-500 hover:bg-red-700'
+        )}
         id={job.id}
       >
-        {type === 'add' && 'Add'}
-        {type === 'remove' && 'Remove'}
+        {type === 'add' && 'Lägg till'}
+        {type === 'remove' && 'Ta bort'}
       </button>
     </li>
   )

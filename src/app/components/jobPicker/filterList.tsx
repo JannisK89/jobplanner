@@ -2,23 +2,26 @@
 import { JobInfo } from '../../types/types'
 import Picker from './picker'
 import PickedList from './pickedList'
-import { useState } from 'react'
+import { useJobStore } from '@/app/store/store'
 
 export default function FilterList({ jobs }: { jobs: JobInfo[] }) {
-  const [addedJobs, setAddedJobs] = useState<JobInfo[]>([])
+  const selectedJobs = useJobStore((state) => state.selectedJobs)
+  const setSelectedJobs = useJobStore((state) => state.setSelectedJobs)
 
   const addJob = (job: JobInfo) => {
-    if (addedJobs.length < 4 && addedJobs.indexOf(job) === -1) {
-      setAddedJobs([...addedJobs, job])
+    if (selectedJobs.length < 4 && selectedJobs.indexOf(job) === -1) {
+      setSelectedJobs([...selectedJobs, job])
     }
   }
   const removeJob = (job: JobInfo) => {
-    setAddedJobs(addedJobs.filter((addedJob) => addedJob.id !== job.id))
+    setSelectedJobs(
+      selectedJobs.filter((selectedJob) => selectedJob.id !== job.id)
+    )
   }
   return (
     <div className="flex">
       <Picker addJob={addJob} jobs={jobs} />
-      <PickedList addedJobs={addedJobs} removeJob={removeJob} />
+      <PickedList addedJobs={selectedJobs} removeJob={removeJob} />
     </div>
   )
 }
