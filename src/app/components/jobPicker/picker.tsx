@@ -13,7 +13,7 @@ export default function Picker({ jobs, addJob }: Props) {
     setFilter(e.target.value)
   }
   return (
-    <div className="bg-white w-1/2 mr-2 p-4 shadow rounded flex flex-col">
+    <div className="w-1/2 mr-2 p-4 rounded flex flex-col">
       <div className="flex flex-col gap-2 ">
         <label className="text-lg" htmlFor="filter">
           Sök yrken

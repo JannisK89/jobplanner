@@ -19,9 +19,12 @@ export default function FilterList({ jobs }: { jobs: JobInfo[] }) {
     )
   }
   return (
-    <div className="flex">
-      <Picker addJob={addJob} jobs={jobs} />
-      <PickedList addedJobs={selectedJobs} removeJob={removeJob} />
+    <div className="container p-2">
+      <h2 className="text-xl  mt-2">Välj Yrken du vill jobba med</h2>
+      <div className="flex">
+        <Picker addJob={addJob} jobs={jobs} />
+        <PickedList addedJobs={selectedJobs} removeJob={removeJob} />
+      </div>
     </div>
   )
 }
