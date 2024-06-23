@@ -1,6 +1,7 @@
 type Input = {
   id: string
   label: string
+  checked: boolean
 }
 
 type Props = {
@@ -20,6 +21,7 @@ export default function Radio({ legend, inputs }: Props) {
               id={input.id}
               name="assistant"
               className="mx-1 self-center"
+              defaultChecked={input.checked}
             />
             <label className="self-center" htmlFor={input.id}>
               {input.label}
