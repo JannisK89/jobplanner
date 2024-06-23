@@ -19,9 +19,9 @@ export default function FilterList({ jobs }: { jobs: JobInfo[] }) {
     )
   }
   return (
-    <div className="container p-2">
-      <h2 className="text-xl  mt-2">Välj Yrken du vill jobba med</h2>
-      <div className="flex">
+    <div className="container py-6">
+      <h1 className="text-4xl tracking-tighter font-semibold">Välj Yrken</h1>
+      <div className="flex divide-x border border-gray-300 pl-4 rounded-xl mt-4">
         <Picker addJob={addJob} jobs={jobs} />
         <PickedList addedJobs={selectedJobs} removeJob={removeJob} />
       </div>

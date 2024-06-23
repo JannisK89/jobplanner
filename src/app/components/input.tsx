@@ -14,14 +14,14 @@ export default function Input({
   onChange,
 }: Props) {
   return (
-    <div className="p4 w-1/2 flex flex-col">
-      <label className="text-lg mb-1">{label}</label>
+    <div className="w-3/4 flex flex-col">
+      <label className="text-base mb-1">{label}</label>
       <input
         onChange={onChange}
         value={value}
         type={type}
         placeholder={placeholder}
-        className="shadow p-2"
+        className="border border-gray-300 rounded p-2 ring-1 ring-gray-300 focus:ring-2 focus:outline-none focus:ring-gray-500 transition duration-200 ease-in-out"
       />
     </div>
   )
