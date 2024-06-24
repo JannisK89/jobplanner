@@ -11,7 +11,7 @@ type Props = {
 
 export default function Radio({ legend, inputs }: Props) {
   return (
-    <fieldset className="flex flex-col mt-2">
+    <fieldset name="" className="flex flex-col mt-2">
       <legend className="text-base mb-1">{legend}</legend>
       <div className="flex gap-3">
         {inputs.map((input) => (
@@ -20,6 +20,7 @@ export default function Radio({ legend, inputs }: Props) {
               type="radio"
               id={input.id}
               name="assistant"
+              value={input.id}
               className="mx-1 self-center"
               defaultChecked={input.checked}
             />

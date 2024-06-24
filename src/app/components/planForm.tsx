@@ -1,21 +1,25 @@
 'use client'
 
-import { useActionState } from 'react'
 import { JobInfo } from '../types/types'
 import Input from './input'
 import FilterList from './jobPicker/filterList'
 import Radio from './radio'
 import TextArea from './textarea'
-import formAction from '../actions/formAction'
+import processForm from '../actions/formAction'
+import { useJobStore } from '../store/store'
 
 type Props = {
   jobInfo: JobInfo[]
 }
 
 export default function PlanForm({ jobInfo }: Props) {
-  const [state, formAction] = useActionState(formAction, 0)
+  const selectedJobs = useJobStore((state) => state.selectedJobs)
+  const processFormWithJobs = processForm.bind(null, selectedJobs)
   return (
-    <form className="md:px-10 text-sm flex flex-col">
+    <form
+      action={processFormWithJobs}
+      className="md:px-10 text-sm flex flex-col"
+    >
       <div className="flex py-3 px-4 justify-between flex-wrap lg:flex-nowrap ">
         <div className=" container flex flex-col gap-2 my-4 font-light">
           <h1 className="text-6xl tracking-tighter font-bold">Skapa ny plan</h1>
@@ -23,12 +27,21 @@ export default function PlanForm({ jobInfo }: Props) {
             Skapa en plan för att hålla koll på dina yrkesval och planera din
             framtid.
           </p>
-          <Input label="Förnamn" placeholder="Skriv förnamn här" />
-          <Input label="Efternamn" placeholder="Skriv efternman här" />
-          <Input label="E-post" placeholder="Skriv e-post här" />
+          <Input
+            label="Förnamn"
+            name="firstName"
+            placeholder="Skriv förnamn här"
+          />
+          <Input
+            label="Efternamn"
+            name="lastName"
+            placeholder="Skriv efternamn här"
+          />
+          <Input label="E-post" name="email" placeholder="Skriv e-post här" />
           <TextArea
             label="Ytterliggare Information"
             placeholder="Skriv ytterliggare information här"
+            name="additionalInfo"
           />
           <Radio
             legend="Använd AI Assistent?"
