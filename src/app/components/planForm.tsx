@@ -7,7 +7,7 @@ import Radio from './radio'
 import TextArea from './textarea'
 import { useJobStore } from '../store/store'
 import { useFormState } from 'react-dom'
-import formValicationAction from '../actions/formValidationAction'
+import processFormAction from '../actions/processFormAction'
 
 type Props = {
   jobInfo: JobInfo[]
@@ -15,10 +15,7 @@ type Props = {
 
 export default function PlanForm({ jobInfo }: Props) {
   const selectedJobs = useJobStore((state) => state.selectedJobs)
-  const processFormWithJobsAction = formValicationAction.bind(
-    null,
-    selectedJobs
-  )
+  const processFormWithJobsAction = processFormAction.bind(null, selectedJobs)
   const [state, formAction] = useFormState(processFormWithJobsAction, null)
 
   return (
@@ -57,7 +54,7 @@ export default function PlanForm({ jobInfo }: Props) {
         <FilterList jobs={jobInfo} />
       </div>
       <div className=" flex h-6 w-full text-red-700 justify-center">
-        {state !== null && <p>{state.errors?.occupations}</p>}
+        {state !== null && <p>{state.errors.occupations}</p>}
       </div>
       <button
         type="submit"

@@ -25,7 +25,7 @@ const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
   return { message: ctx.defaultError }
 }
 
-export default async function formValicationAction(
+export default async function processFormAction(
   jobInfo: JobInfo[],
   previousState: any,
   formData: FormData
@@ -41,13 +41,9 @@ export default async function formValicationAction(
   })
 
   if (!validateFields.success) {
-    console.log(validateFields.error.flatten().fieldErrors)
     return {
       errors: validateFields.error.flatten().fieldErrors,
     }
   }
-  console.log(
-    `Generating plan for ${validateFields.data.firstName} ${validateFields.data.lastName}`
-  )
-  return { errors: null }
+  return null
 }
