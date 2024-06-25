@@ -19,6 +19,7 @@ export default function Job({ job, type, clickHandler }: Props) {
           type === 'remove' && 'bg-red-500 hover:bg-red-700'
         )}
         id={job.id}
+        type="button"
       >
         {type === 'add' && 'Lägg till'}
         {type === 'remove' && 'Ta bort'}

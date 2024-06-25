@@ -18,11 +18,20 @@ const formSchema = z.object({
     .max(4),
 })
 
-export default async function processForm(
+const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+  if (issue.code === z.ZodIssueCode.too_small) {
+    return { message: 'Du måste välja minst 1 yrke.' }
+  }
+  return { message: ctx.defaultError }
+}
+
+export default async function formValicationAction(
   jobInfo: JobInfo[],
+  previousState: any,
   formData: FormData
 ) {
-  return formSchema.safeParse({
+  z.setErrorMap(customErrorMap)
+  const validateFields = formSchema.safeParse({
     firstName: formData.get('firstName'),
     lastName: formData.get('lastName'),
     email: formData.get('email'),
@@ -30,4 +39,15 @@ export default async function processForm(
     assistant: formData.get('assistant') === 'assistantYes',
     occupations: jobInfo,
   })
+
+  if (!validateFields.success) {
+    console.log(validateFields.error.flatten().fieldErrors)
+    return {
+      errors: validateFields.error.flatten().fieldErrors,
+    }
+  }
+  console.log(
+    `Generating plan for ${validateFields.data.firstName} ${validateFields.data.lastName}`
+  )
+  return { errors: null }
 }
