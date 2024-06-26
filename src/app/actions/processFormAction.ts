@@ -12,6 +12,8 @@ const formSchema = z.object({
     .object({
       title: z.string().min(1).max(100),
       id: z.string().min(1).max(30),
+      education: z.boolean(),
+      experience: z.boolean(),
     })
     .array()
     .min(1)
@@ -45,5 +47,6 @@ export default async function processFormAction(
       errors: validateFields.error.flatten().fieldErrors,
     }
   }
+  console.log(validateFields.data)
   return null
 }
