@@ -58,7 +58,7 @@ export default function PlanForm({ jobInfo }: Props) {
       </div>
       <button
         type="submit"
-        className="bg-gray-900 w-1/3 self-center hover:bg-gray-700 text-white p-2 rounded mt-1 drop-shadow-2xl"
+        className="bg-gray-900 w-1/3 self-center hover:bg-gray-700 text-white p-2 rounded mt-1 mb-4 drop-shadow-2xl"
       >
         Skapa Plan
       </button>

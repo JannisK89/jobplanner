@@ -18,6 +18,7 @@ export default function FilterList({ jobs }: { jobs: JobInfo[] }) {
       selectedJobs.filter((selectedJob) => selectedJob.id !== job.id)
     )
   }
+
   return (
     <div className="container py-6">
       <h1 className="text-4xl tracking-tighter font-semibold mb-4">

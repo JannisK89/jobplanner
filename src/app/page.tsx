@@ -16,6 +16,8 @@ const fetchJobData = async () => {
   const jobInfo: JobInfo[] = taxonomy.map((job) => ({
     id: job['taxonomy/id'],
     title: job['taxonomy/preferred-label'],
+    education: false,
+    experience: false,
   }))
   return jobInfo
 }
