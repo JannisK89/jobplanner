@@ -1,6 +1,8 @@
 'use server'
 import { z } from 'zod'
 import { JobInfo } from '../types/types'
+import { db } from '@/db'
+import { createPlan } from '@/db/queries'
 
 const formSchema = z.object({
   firstName: z.string().min(1).max(50),
@@ -47,6 +49,14 @@ export default async function processFormAction(
       errors: validateFields.error.flatten().fieldErrors,
     }
   }
-  console.log(validateFields.data)
-  return null
+
+  await createPlan({
+    firstName: validateFields.data.firstName,
+    lastName: validateFields.data.lastName,
+    text1: validateFields.data.additionalInfo,
+    text2: 'Text 2 goes here',
+    text3: 'Text 3 goes here',
+  })
+
+  return 'success'
 }

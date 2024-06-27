@@ -8,6 +8,7 @@ type Taxonomy = {
 }
 
 const fetchJobData = async () => {
+  'use server'
   const res = await fetch(
     'https://taxonomy.api.jobtechdev.se/v1/taxonomy/main/concepts?type=job-title&version=latest&limit=100',
     { next: { revalidate: false } }

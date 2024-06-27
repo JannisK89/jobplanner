@@ -44,6 +44,8 @@ async function generateText(data: Data) {
         2. What are the jobseekers weaknesses for the roles they are seeking?
         3. How can the jobseeker improve their chances of getting a job in the
         roles they are seeking?
+
+        Your answer should be in Swedish.
           `,
       },
       {

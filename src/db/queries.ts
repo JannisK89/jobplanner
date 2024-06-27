@@ -1,10 +1,23 @@
 import { asc, count, eq, getTableColumns, sql } from 'drizzle-orm'
 import { db } from './index'
-import { usersTable, InsertUser, postsTable, SelectUser } from './schema'
+import {
+  planTable,
+  InsertPlan,
+  SelectPlan,
+  occupationTable,
+  SelectOccuoation,
+  InsertOccupation,
+} from './schema'
 
-export async function createUser(data: InsertUser) {
-  await db.insert(usersTable).values(data)
+export async function createPlan(data: InsertPlan) {
+  await db.insert(planTable).values(data)
 }
+
+export async function createOccupation(data: InsertOccupation[]) {
+  await db.insert(occupationTable).values(data)
+}
+
+/*
 
 export async function getUserById(id: SelectUser['id']): Promise<
   Array<{
@@ -52,3 +65,4 @@ export async function getUsersWithPostsCount(
     .limit(pageSize)
     .offset((page - 1) * pageSize)
 }
+*/

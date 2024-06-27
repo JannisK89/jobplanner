@@ -54,7 +54,9 @@ export default function PlanForm({ jobInfo }: Props) {
         <FilterList jobs={jobInfo} />
       </div>
       <div className=" flex h-6 w-full text-red-700 justify-center">
-        {state !== null && <p>{state.errors.occupations}</p>}
+        {state !== null && typeof state !== 'string' && (
+          <p>{state.errors.occupations}</p>
+        )}
       </div>
       <button
         type="submit"
