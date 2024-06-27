@@ -1,4 +1,3 @@
-import { asc, count, eq, getTableColumns, sql } from 'drizzle-orm'
 import { db } from './index'
 import {
   planTable,
@@ -9,12 +8,34 @@ import {
   InsertOccupation,
 } from './schema'
 
-export async function createPlan(data: InsertPlan) {
-  await db.insert(planTable).values(data)
+type OccupationWithoutId = Omit<InsertOccupation, 'planId'>
+
+export async function createPlan(
+  planData: InsertPlan,
+  occupationData: OccupationWithoutId[]
+) {
+  const [{ id }] = await db
+    .insert(planTable)
+    .values(planData)
+    .returning({ id: planTable.id })
+
+  await createOccupation(occupationData, id)
 }
 
-export async function createOccupation(data: InsertOccupation[]) {
-  await db.insert(occupationTable).values(data)
+export async function createOccupation(
+  data: OccupationWithoutId[],
+  id: string
+) {
+  await db
+    .insert(occupationTable)
+    .values(
+      data.map((d) => ({
+        title: d.title,
+        education: d.education,
+        experience: d.experience,
+        planId: id,
+      }))
+    )
 }
 
 /*

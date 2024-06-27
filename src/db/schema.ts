@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { pgTable, boolean, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 export const planTable = pgTable('plan_table', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -13,8 +13,8 @@ export const planTable = pgTable('plan_table', {
 export const occupationTable = pgTable('occupation_table', {
   id: uuid('id').defaultRandom().primaryKey(),
   title: text('title').notNull(),
-  education: text('education').notNull(),
-  experience: text('experience').notNull(),
+  education: boolean('education').notNull(),
+  experience: boolean('experience').notNull(),
   planId: uuid('plan_id')
     .notNull()
     .references(() => planTable.id, { onDelete: 'cascade' }),

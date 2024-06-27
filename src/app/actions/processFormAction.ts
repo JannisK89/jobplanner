@@ -50,13 +50,16 @@ export default async function processFormAction(
     }
   }
 
-  await createPlan({
-    firstName: validateFields.data.firstName,
-    lastName: validateFields.data.lastName,
-    text1: validateFields.data.additionalInfo,
-    text2: 'Text 2 goes here',
-    text3: 'Text 3 goes here',
-  })
+  await createPlan(
+    {
+      firstName: validateFields.data.firstName,
+      lastName: validateFields.data.lastName,
+      text1: validateFields.data.additionalInfo,
+      text2: 'Text 2 goes here',
+      text3: 'Text 3 goes here',
+    },
+    validateFields.data.occupations
+  )
 
   return 'success'
 }
