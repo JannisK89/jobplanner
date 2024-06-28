@@ -1,8 +1,8 @@
 'use server'
 import { z } from 'zod'
 import { JobInfo } from '../types/types'
-import { db } from '@/db'
 import { createPlan } from '@/db/queries'
+import generateTexts from '../lib/gtp'
 
 const formSchema = z.object({
   firstName: z.string().min(1).max(50),
@@ -29,13 +29,9 @@ const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
   return { message: ctx.defaultError }
 }
 
-export default async function processFormAction(
-  jobInfo: JobInfo[],
-  previousState: any,
-  formData: FormData
-) {
+const validateFields = (formData: FormData, jobInfo: JobInfo[]) => {
   z.setErrorMap(customErrorMap)
-  const validateFields = formSchema.safeParse({
+  const validatedFields = formSchema.safeParse({
     firstName: formData.get('firstName'),
     lastName: formData.get('lastName'),
     email: formData.get('email'),
@@ -44,22 +40,53 @@ export default async function processFormAction(
     occupations: jobInfo,
   })
 
-  if (!validateFields.success) {
+  return validatedFields
+}
+
+export default async function processFormAction(
+  jobInfo: JobInfo[],
+  previousState: any,
+  formData: FormData
+) {
+  let generatedTexts: string[] | undefined
+  const validatedFields = validateFields(formData, jobInfo)
+
+  if (!validatedFields.success) {
     return {
-      errors: validateFields.error.flatten().fieldErrors,
+      errors: validatedFields.error.flatten().fieldErrors,
     }
   }
 
-  await createPlan(
-    {
-      firstName: validateFields.data.firstName,
-      lastName: validateFields.data.lastName,
-      text1: validateFields.data.additionalInfo,
-      text2: 'Text 2 goes here',
-      text3: 'Text 3 goes here',
-    },
-    validateFields.data.occupations
-  )
+  try {
+    if (validatedFields.data.assistant) {
+      generatedTexts = await generateTexts({
+        firstName: validatedFields.data.firstName,
+        lastName: validatedFields.data.lastName,
+        occupations: validatedFields.data.occupations,
+        additionalInformation: validatedFields.data.additionalInfo,
+      })
+
+      if (generatedTexts === undefined) {
+        throw new Error('Texten kunde inte genereras korrekt.')
+      }
+    } else {
+      generatedTexts = ['', '', '']
+    }
+
+    await createPlan(
+      {
+        firstName: validatedFields.data.firstName,
+        lastName: validatedFields.data.lastName,
+        text1: generatedTexts[0],
+        text2: generatedTexts[1],
+        text3: generatedTexts[2],
+      },
+      validatedFields.data.occupations
+    )
+  } catch (e) {
+    console.error(e)
+    return 'Något gick fel när planen skulle skapas. Vänligen försök igen inom kort.'
+  }
 
   return 'success'
 }
