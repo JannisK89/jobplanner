@@ -12,4 +12,5 @@ export type Plan = {
   text2: string
   text3: string
   occupations: JobInfo[]
+  status: string
 }

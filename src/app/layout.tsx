@@ -26,7 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={libre_franklin.variable + ' ' + chivo.variable}>
+      <body
+        className={
+          libre_franklin.variable + ' ' + chivo.variable + 'antialiased'
+        }
+      >
         {children}
       </body>
     </html>

@@ -42,6 +42,7 @@ export default function PlanForm({ jobInfo }: Props) {
             label="Ytterliggare Information"
             placeholder="Skriv ytterliggare information här"
             name="additionalInfo"
+            maxLength={300}
           />
           <Radio
             legend="Använd AI Assistent?"
