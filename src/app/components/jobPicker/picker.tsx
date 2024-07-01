@@ -13,7 +13,7 @@ export default function Picker({ jobs, addJob }: Props) {
     setFilter(e.target.value)
   }
   return (
-    <div className="w-1/2 mr-2 p-4 rounded flex flex-col">
+    <div className="md:w-1/2 mr-2 p-4 rounded flex flex-col">
       <div className="flex flex-col gap-2 ">
         <label className="text-lg" htmlFor="filter">
           Sök yrken
@@ -31,6 +31,7 @@ export default function Picker({ jobs, addJob }: Props) {
           .filter((job) => {
             return job.title.toLowerCase().includes(filter.toLowerCase())
           })
+          .slice(0, 500)
           .map((job) => (
             <Job key={job.id} job={job} clickHandler={addJob} type="add" />
           ))}

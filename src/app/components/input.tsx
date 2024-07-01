@@ -20,7 +20,7 @@ export default function Input({
 }: Props) {
   const { pending } = useFormStatus()
   return (
-    <div className="w-3/4 flex flex-col">
+    <div className="md:w-3/4 flex flex-col">
       <label className="text-base mb-1">{label}</label>
       <input
         onChange={onChange}

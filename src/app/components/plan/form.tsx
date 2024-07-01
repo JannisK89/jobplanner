@@ -43,7 +43,7 @@ export default function Form({ plan, occupations }: Props) {
     }
   }
   return (
-    <form className="flex flex-col gap-6 md:px-60 py-6 container">
+    <form className="flex flex-col gap-6 px-32 py-6 container">
       <div>
         <h2 className="text-xl font-bold">
           {plan.firstName} {plan.lastName}
@@ -60,7 +60,7 @@ export default function Form({ plan, occupations }: Props) {
             return (
               occupation !== null && (
                 <li
-                  className="border bg-gray-50 border-gray-200 shadow p-4 w-3/4"
+                  className="border bg-gray-50 border-gray-200 shadow p-4 md:w-3/4"
                   key={occupation.id}
                 >
                   <span className="font-semibold">{occupation.title}</span> -

@@ -26,11 +26,11 @@ export default function TextArea({
 }: Props) {
   const { pending } = useFormStatus()
   return (
-    <div className="w-3/4 flex flex-col">
+    <div className="md:w-3/4 flex flex-col">
       <label
         className={clsx(
-          'mb-1',
-          labelStyle === 'large' && 'text-xl font-normal',
+          'md:mb-1 mb-2',
+          labelStyle === 'large' && 'md:text-xl text-lg font-normal',
           labelStyle === 'normal' && 'text-base'
         )}
       >

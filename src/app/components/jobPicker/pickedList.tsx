@@ -9,7 +9,7 @@ type Props = {
 
 export default function PickedList({ addedJobs, removeJob }: Props) {
   return (
-    <div className="w-1/2 p-4 rounded flex flex-col">
+    <div className="md:w-1/2 p-4 rounded flex flex-col">
       <div className="flex flex-col gap-2 ">
         <h2 className="text-lg">Tillagda yrken</h2>
         <p
