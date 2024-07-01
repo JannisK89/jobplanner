@@ -8,6 +8,7 @@ import TextArea from './textarea'
 import { useJobStore } from '../store/store'
 import { useFormState } from 'react-dom'
 import processFormAction from '../actions/processFormAction'
+import SubmitButton from './button'
 
 type Props = {
   jobInfo: JobInfo[]
@@ -55,16 +56,14 @@ export default function PlanForm({ jobInfo }: Props) {
         <FilterList jobs={jobInfo} />
       </div>
       <div className=" flex h-6 w-full text-red-700 justify-center">
-        {state !== null && typeof state !== 'string' && (
+        {state !== null && state !== undefined && typeof state !== 'string' && (
           <p>{state.errors.occupations}</p>
         )}
       </div>
-      <button
-        type="submit"
-        className="bg-gray-900 w-1/3 self-center hover:bg-gray-700 text-white p-2 rounded mt-1 mb-4 drop-shadow-2xl"
-      >
-        Skapa Plan
-      </button>
+      <SubmitButton
+        text="Skapa Plan"
+        pendingText="Skapar Plan... Detta kan ta någon minut"
+      />
     </form>
   )
 }

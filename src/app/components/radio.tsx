@@ -1,3 +1,5 @@
+import { useFormStatus } from 'react-dom'
+
 type Input = {
   id: string
   label: string
@@ -10,6 +12,7 @@ type Props = {
 }
 
 export default function Radio({ legend, inputs }: Props) {
+  const { pending } = useFormStatus()
   return (
     <fieldset name="" className="flex flex-col mt-2">
       <legend className="text-base mb-1">{legend}</legend>
@@ -23,6 +26,7 @@ export default function Radio({ legend, inputs }: Props) {
               value={input.id}
               className="mx-1 self-center"
               defaultChecked={input.checked}
+              disabled={pending}
             />
             <label className="self-center" htmlFor={input.id}>
               {input.label}

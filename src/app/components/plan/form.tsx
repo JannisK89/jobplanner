@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import TextArea from '../textarea'
+import { useJobStore } from '@/app/store/store'
 
 type Props = {
   plan: {
@@ -27,6 +28,8 @@ export default function Form({ plan, occupations }: Props) {
   const [text1, setText1] = useState(plan.text1)
   const [text2, setText2] = useState(plan.text2)
   const [text3, setText3] = useState(plan.text3)
+  const setSelectedJobs = useJobStore((state) => state.setSelectedJobs)
+  setSelectedJobs([])
 
   const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.name === 'text1') {

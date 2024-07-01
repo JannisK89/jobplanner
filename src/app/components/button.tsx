@@ -1,23 +1,23 @@
+import clsx from 'clsx'
+import { useFormStatus } from 'react-dom'
+
 type Props = {
-  onClick?: () => void
-  children: React.ReactNode
-  className?: string
-  type?: 'button' | 'submit'
+  text: string
+  pendingText: string
 }
 
-export default function Button({
-  onClick,
-  children,
-  className,
-  type = 'button',
-}: Props) {
+export default function SubmitButton({ text, pendingText }: Props) {
+  const { pending } = useFormStatus()
   return (
     <button
-      onClick={onClick}
-      className={`bg-blue-700 hover:bg-blue-500 transition-colors ease-in-out duration-300 text-white rounded-xl shadow p-3 ${className}`}
-      type={type}
+      className={clsx(
+        'bg-gray-900 w-1/3 self-center hover:bg-gray-700 text-white p-2 rounded mt-1 mb-4 drop-shadow-2xl',
+        pending && 'bg-gray-600'
+      )}
+      type="submit"
+      disabled={pending}
     >
-      {children}
+      {pending ? pendingText : text}
     </button>
   )
 }

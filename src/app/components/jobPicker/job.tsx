@@ -1,6 +1,7 @@
 import { useJobStore } from '@/app/store/store'
 import { JobInfo } from '@/app/types/types'
 import clsx from 'clsx'
+import { useFormStatus } from 'react-dom'
 
 type Props = {
   job: JobInfo
@@ -11,6 +12,7 @@ type Props = {
 export default function Job({ job, type, clickHandler }: Props) {
   const selectedJobs = useJobStore((state) => state.selectedJobs)
   const setSelectedJobs = useJobStore((state) => state.setSelectedJobs)
+  const { pending } = useFormStatus()
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedJobs(
@@ -50,6 +52,7 @@ export default function Job({ job, type, clickHandler }: Props) {
                   }
                   onChange={changeHandler}
                   name="education"
+                  disabled={pending}
                 />
               </div>
               <div className="flex gap-1 items-center">
@@ -63,6 +66,7 @@ export default function Job({ job, type, clickHandler }: Props) {
                   }
                   onChange={changeHandler}
                   name="experience"
+                  disabled={pending}
                 />
               </div>
             </div>
@@ -73,10 +77,12 @@ export default function Job({ job, type, clickHandler }: Props) {
           className={clsx(
             'ml-2 text-white p-1 px-3 rounded text-nowrap max-h-8 self-center',
             type === 'add' && 'bg-blue-500 hover:bg-blue-700',
-            type === 'remove' && 'bg-red-500 hover:bg-red-700'
+            type === 'remove' && 'bg-red-500 hover:bg-red-700',
+            pending && 'bg-gray-500'
           )}
           id={job.id}
           type="button"
+          disabled={pending}
         >
           {type === 'add' && 'Lägg till'}
           {type === 'remove' && 'Ta bort'}

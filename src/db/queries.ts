@@ -20,6 +20,7 @@ export async function createPlan(
     .returning({ id: planTable.id })
 
   await createOccupation(occupationData, id)
+  return id
 }
 
 export async function createOccupation(

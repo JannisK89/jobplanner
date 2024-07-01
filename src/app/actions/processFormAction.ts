@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { JobInfo } from '../types/types'
 import { createPlan } from '@/db/queries'
 import generateTexts from '../lib/gtp'
+import { redirect } from 'next/navigation'
 
 const formSchema = z.object({
   firstName: z.string().min(1).max(50),
@@ -49,6 +50,7 @@ export default async function processFormAction(
   formData: FormData
 ) {
   let generatedTexts: string[] | undefined
+  let id
   const validatedFields = validateFields(formData, jobInfo)
 
   if (!validatedFields.success) {
@@ -73,7 +75,7 @@ export default async function processFormAction(
       generatedTexts = ['', '', '']
     }
 
-    await createPlan(
+    id = await createPlan(
       {
         firstName: validatedFields.data.firstName,
         lastName: validatedFields.data.lastName,
@@ -86,7 +88,9 @@ export default async function processFormAction(
   } catch (e) {
     console.error(e)
     return 'Något gick fel när planen skulle skapas. Vänligen försök igen inom kort.'
+  } finally {
+    if (id !== undefined) {
+      redirect(`/plan/${id}`)
+    }
   }
-
-  return 'success'
 }
