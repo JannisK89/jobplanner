@@ -41,7 +41,7 @@ export default function TextArea({
         value={value}
         placeholder={placeholder}
         className={clsx(
-          'border border-gray-300 h-60 rounded p-2 ring-1 ring-gray-300 focus:ring-2 focus:outline-none focus:ring-gray-500 transition duration-200 ease-in-out',
+          'border border-gray-300 rounded p-2 ring-1 ring-gray-300 focus:ring-2 focus:outline-none focus:ring-gray-500 transition duration-200 ease-in-out',
           height,
           pending && 'bg-gray-200'
         )}

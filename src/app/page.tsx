@@ -9,7 +9,7 @@ type Taxonomy = {
 
 const fetchJobData = async () => {
   const res = await fetch(
-    'https://taxonomy.api.jobtechdev.se/v1/taxonomy/main/concepts?type=job-title&version=latest&limit=100',
+    'https://taxonomy.api.jobtechdev.se/v1/taxonomy/main/concepts?type=job-title&version=latest&limit=2000',
     { next: { revalidate: false } }
   )
   const taxonomy: Taxonomy[] = await res.json()
