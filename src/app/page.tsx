@@ -6,7 +6,7 @@ type Taxonomy = {
   'taxonomy/id': string
   'taxonomy/preferred-label': string
 }
-export const maxDuration = 20
+export const maxDuration = 30
 
 const fetchJobData = async () => {
   try {
