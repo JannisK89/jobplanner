@@ -77,8 +77,8 @@ export default function Job({ job, type, clickHandler }: Props) {
           onClick={() => clickHandler(job)}
           className={clsx(
             'ml-2 text-white p-1 px-3 rounded text-nowrap max-h-8 self-center',
-            type === 'add' && 'bg-blue-500 hover:bg-blue-700',
-            type === 'remove' && 'bg-red-500 hover:bg-red-700',
+            type === 'add' && !pending && 'bg-blue-500 hover:bg-blue-700',
+            type === 'remove' && !pending && 'bg-red-500 hover:bg-red-700',
             pending && 'bg-gray-500'
           )}
           id={job.id}
