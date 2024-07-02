@@ -21,8 +21,8 @@ export default function PlanForm({ jobInfo }: Props) {
 
   return (
     <form action={formAction} className="text-sm md:px-10 flex flex-col">
-      <div className="flex py-3 px-4 justify-between flex-wrap lg:flex-nowrap ">
-        <div className=" container flex flex-col gap-2 my-4 font-light">
+      <div className="flex py-1 px-4 justify-between flex-wrap lg:flex-nowrap ">
+        <div className=" container flex flex-col gap-2 mt-4 font-light">
           <h1 className="md:text-6xl text-3xl tracking-tighter font-bold">
             Skapa ny plan
           </h1>

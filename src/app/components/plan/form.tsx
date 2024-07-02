@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import TextArea from '../textarea'
 import { useJobStore } from '@/app/store/store'
+import SubmitButton from '../button'
 
 type Props = {
   plan: {
@@ -23,6 +24,9 @@ type Props = {
   } | null)[]
 }
 
+const infoText = `Tänk på att informationen från AI Assistenten inte alltid 
+är korrekt.`
+
 export default function Form({ plan, occupations }: Props) {
   const isProposed = plan.status === 'proposed'
   const [text1, setText1] = useState(plan.text1)
@@ -43,8 +47,8 @@ export default function Form({ plan, occupations }: Props) {
     }
   }
   return (
-    <form className="flex flex-col gap-6 px-32 py-6 container">
-      <div>
+    <form className="flex flex-col gap-6 px-12 py-6 container">
+      <div className="lg:fixed lg:right-20 border bg-gray-100 p-6 lg:min-w-96">
         <h2 className="text-xl font-bold">
           {plan.firstName} {plan.lastName}
         </h2>
@@ -52,27 +56,33 @@ export default function Form({ plan, occupations }: Props) {
           <span className="font-medium">Status: </span>
           {isProposed ? 'Föreslagen' : 'Aktiv'}
         </p>
-      </div>
-      <div className="flex flex-col gap-2 -2/3">
-        <h3 className="text-lg font-semibold ">Yrkesinformation</h3>
-        <ul className="flex flex-col gap-2">
-          {occupations.map((occupation) => {
-            return (
-              occupation !== null && (
-                <li
-                  className="border bg-gray-50 border-gray-200 shadow p-4 md:w-3/4"
-                  key={occupation.id}
-                >
-                  <span className="font-semibold">{occupation.title}</span> -
-                  Utbildning: {occupation.education ? 'Ja' : 'Nej'} -
-                  Erfarenhet: {occupation.experience ? 'Ja' : 'Nej'}
-                </li>
+        <div className="flex flex-col gap-2 mt-3">
+          <h3 className="text-lg font-semibold ">Yrkesinformation</h3>
+          <ul className="flex flex-col gap-2">
+            {occupations.map((occupation) => {
+              return (
+                occupation !== null && (
+                  <li
+                    className="border flex flex-col bg-gray-50 border-gray-200 shadow p-4 "
+                    key={occupation.id}
+                  >
+                    <span className="font-semibold">{occupation.title}</span>
+                    <span>
+                      {' '}
+                      Utbildning: {occupation.education ? 'Ja' : 'Nej'}{' '}
+                    </span>
+                    <span>
+                      {' '}
+                      Erfarenhet: {occupation.experience ? 'Ja' : 'Nej'}
+                    </span>
+                  </li>
+                )
               )
-            )
-          })}
-        </ul>
+            })}
+          </ul>
+        </div>
       </div>
-      <div className="flex flex-col gap-6 mt-4">
+      <div className="flex flex-col gap-6 mt-4 lg:w-5/6">
         <TextArea
           label="Arbetsökandes Styrkor"
           maxLength={1000}
@@ -82,6 +92,7 @@ export default function Form({ plan, occupations }: Props) {
           name="text1"
           value={text1}
           onChange={changeHandler}
+          infoText={infoText}
         />
         <TextArea
           label="Arbetsökandes Förbättringsmöjligheter"
@@ -92,6 +103,7 @@ export default function Form({ plan, occupations }: Props) {
           name="text2"
           value={text2}
           onChange={changeHandler}
+          infoText={infoText}
         />
         <TextArea
           label="Öka chansen för jobb"
@@ -102,8 +114,11 @@ export default function Form({ plan, occupations }: Props) {
           name="text3"
           value={text3}
           onChange={changeHandler}
+          infoText={infoText}
         />
       </div>
+
+      <SubmitButton text="Spara" pendingText="Sparar Plan.." />
     </form>
   )
 }

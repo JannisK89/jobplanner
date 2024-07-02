@@ -12,7 +12,7 @@ export default function SubmitButton({ text, pendingText }: Props) {
   return (
     <button
       className={clsx(
-        'w-1/3 self-center  text-white p-2 rounded mt-1 mb-4 drop-shadow-2xl',
+        'w-1/3 self-center  text-white p-2 rounded  mb-4 drop-shadow-2xl',
         pending && 'bg-gray-600 hover:bg-gray-600 cursor-not-allowed',
         !pending && 'hover:bg-gray-800 bg-gray-900 '
       )}

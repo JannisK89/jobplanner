@@ -1,6 +1,7 @@
 import { JobInfo } from '@/app/types/types'
 import Job from './job'
 import { useState } from 'react'
+import { useFormStatus } from 'react-dom'
 
 type Props = {
   jobs: JobInfo[]
@@ -8,6 +9,7 @@ type Props = {
 }
 
 export default function Picker({ jobs, addJob }: Props) {
+  const { pending } = useFormStatus()
   const [filter, setFilter] = useState('')
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value)
@@ -24,6 +26,7 @@ export default function Picker({ jobs, addJob }: Props) {
           value={filter}
           onChange={changeHandler}
           id="filter"
+          disabled={pending}
         />
       </div>
       <ul className="overflow-auto h-72 ">

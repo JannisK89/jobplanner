@@ -10,6 +10,7 @@ type Props = {
   maxLength?: number
   disabled?: boolean
   labelStyle?: 'normal' | 'large'
+  infoText?: string
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
@@ -22,12 +23,14 @@ export default function TextArea({
   maxLength,
   labelStyle = 'normal',
   disabled = false,
+  infoText,
   onChange,
 }: Props) {
   const { pending } = useFormStatus()
   return (
     <div className="md:w-3/4 flex flex-col">
       <label
+        htmlFor={name}
         className={clsx(
           'md:mb-1 mb-2',
           labelStyle === 'large' && 'md:text-xl text-lg font-normal',
@@ -36,6 +39,7 @@ export default function TextArea({
       >
         {label}
       </label>
+      <p className="text-sm text-gray-500 mb-2">{infoText}</p>
       <textarea
         onChange={onChange}
         value={value}
