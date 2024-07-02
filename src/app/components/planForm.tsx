@@ -61,6 +61,7 @@ export default function PlanForm({ jobInfo }: Props) {
         {state !== null && state !== undefined && typeof state !== 'string' && (
           <p>{state.errors.occupations}</p>
         )}
+        {typeof state === 'string' && <p>{state}</p>}
       </div>
       <SubmitButton
         text="Skapa Plan"
