@@ -9,7 +9,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <Header />
-      <main>
+      <main className="pt-3">
         <Form plan={plan} occupations={occupations} />
       </main>
     </div>

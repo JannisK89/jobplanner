@@ -8,6 +8,7 @@ type Props = {
   name?: string
   height?: 'h-20' | 'h-60'
   maxLength?: number
+  minLength?: number
   disabled?: boolean
   labelStyle?: 'normal' | 'large'
   infoText?: string
@@ -21,6 +22,7 @@ export default function TextArea({
   name,
   height = 'h-20',
   maxLength,
+  minLength,
   labelStyle = 'normal',
   disabled = false,
   infoText,
@@ -50,6 +52,7 @@ export default function TextArea({
           pending && 'bg-gray-200'
         )}
         maxLength={maxLength}
+        minLength={minLength}
         name={name}
         disabled={disabled || pending}
       />

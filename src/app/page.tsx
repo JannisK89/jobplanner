@@ -31,7 +31,7 @@ const fetchJobData = async () => {
 export default async function Home() {
   const jobInfo = await fetchJobData()
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="flex flex-col min-h-[100dvh] lg:pt-14">
       <Header />
       <main>
         <PlanForm jobInfo={jobInfo} />

@@ -6,6 +6,7 @@ import {
   SelectPlan,
   occupationTable,
   InsertOccupation,
+  SavePlan,
 } from './schema'
 
 type OccupationWithoutId = Omit<InsertOccupation, 'planId'>
@@ -42,5 +43,12 @@ export async function getPlan(id: SelectPlan['id']) {
     .select()
     .from(planTable)
     .leftJoin(occupationTable, eq(planTable.id, occupationTable.planId))
+    .where(eq(planTable.id, id))
+}
+
+export async function activatePlan(id: SelectPlan['id'], data: SavePlan) {
+  await db
+    .update(planTable)
+    .set({ ...data, status: 'active' })
     .where(eq(planTable.id, id))
 }

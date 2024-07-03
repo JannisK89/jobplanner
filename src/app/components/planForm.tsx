@@ -9,6 +9,7 @@ import { useJobStore } from '../store/store'
 import { useFormState } from 'react-dom'
 import processFormAction from '../actions/processFormAction'
 import SubmitButton from './button'
+import { useEffect } from 'react'
 
 type Props = {
   jobInfo: JobInfo[]
@@ -16,8 +17,14 @@ type Props = {
 
 export default function PlanForm({ jobInfo }: Props) {
   const selectedJobs = useJobStore((state) => state.selectedJobs)
+  const setSelectedJobs = useJobStore((state) => state.setSelectedJobs)
   const processFormWithJobsAction = processFormAction.bind(null, selectedJobs)
   const [state, formAction] = useFormState(processFormWithJobsAction, null)
+  useEffect(() => {
+    return () => {
+      setSelectedJobs([])
+    }
+  }, [setSelectedJobs])
 
   return (
     <form action={formAction} className="text-sm md:px-10 flex flex-col">

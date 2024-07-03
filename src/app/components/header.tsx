@@ -3,7 +3,7 @@ import { CgBriefcase } from 'react-icons/cg'
 
 export default function Header() {
   return (
-    <header className="w-full p-3 shadow flex justify-between items-center">
+    <header className="w-full p-3 shadow flex justify-between items-center lg:fixed top-0 bg-white bg-opacity-80 backdrop-blur-sm">
       <Link className="text-xl md:ml-20 flex gap-2 items-center" href="/">
         <CgBriefcase />
         <h1 className="font-bold">Arbetsplaneraren</h1>

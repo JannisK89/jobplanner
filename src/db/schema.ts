@@ -23,6 +23,7 @@ export const occupationTable = pgTable('occupation_table', {
 
 export type InsertPlan = typeof planTable.$inferInsert
 export type SelectPlan = typeof planTable.$inferSelect
+export type SavePlan = Pick<SelectPlan, 'text1' | 'text2' | 'text3'>
 
 export type InsertOccupation = typeof occupationTable.$inferInsert
 export type SelectOccuoation = typeof occupationTable.$inferSelect
