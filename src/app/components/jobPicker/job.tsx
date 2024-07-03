@@ -17,7 +17,6 @@ export default function Job({ job, type, clickHandler }: Props) {
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedJobs(
       selectedJobs.map((selectedJob) => {
-        console.log(selectedJob)
         if (selectedJob.id === job.id && e.target.name === 'education') {
           return {
             ...selectedJob,
