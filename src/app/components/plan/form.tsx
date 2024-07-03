@@ -90,7 +90,7 @@ export default function Form({ plan, occupations }: Props) {
           <div className="flex flex-col gap-6 lg:mt-10 lg:w-5/6">
             <TextArea
               label="Arbetsökandes Styrkor"
-              maxLength={2000}
+              maxLength={1900}
               height="h-60"
               disabled={!isProposed}
               labelStyle="large"
@@ -101,7 +101,7 @@ export default function Form({ plan, occupations }: Props) {
             />
             <TextArea
               label="Arbetsökandes Förbättringsmöjligheter"
-              maxLength={2000}
+              maxLength={1900}
               height="h-60"
               disabled={!isProposed}
               labelStyle="large"
@@ -112,7 +112,7 @@ export default function Form({ plan, occupations }: Props) {
             />
             <TextArea
               label="Öka chansen för jobb"
-              maxLength={2000}
+              maxLength={1900}
               height="h-60"
               disabled={!isProposed}
               labelStyle="large"

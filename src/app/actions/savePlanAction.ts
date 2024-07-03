@@ -4,9 +4,9 @@ import { activatePlan, getPlan } from '@/db/queries'
 import { revalidatePath } from 'next/cache'
 
 const formSchema = z.object({
-  text1: z.string().min(1).max(2005),
-  text2: z.string().min(1).max(2005),
-  text3: z.string().min(1).max(2005),
+  text1: z.string().min(1).max(2000),
+  text2: z.string().min(1).max(2000),
+  text3: z.string().min(1).max(2000),
 })
 
 const validateFields = (formData: FormData) => {
