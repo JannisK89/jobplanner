@@ -11,7 +11,7 @@ export const maxDuration = 60
 const fetchJobData = async () => {
   try {
     const res = await fetch(
-      'https://taxonomy.api.jobtechdev.se/v1/taxonomy/main/concepts?type=job-title&version=latest',
+      'https://taxonomy.api.jobtechdev.se/v1/taxonomy/main/concepts?type=occupation-name&version=latest',
       { next: { revalidate: false } }
     )
     const taxonomy: Taxonomy[] = await res.json()

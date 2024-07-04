@@ -89,7 +89,7 @@ export default function Form({ plan, occupations }: Props) {
         <>
           <div className="flex flex-col gap-6 lg:mt-10 lg:w-5/6">
             <TextArea
-              label="Arbetsökandes Styrkor"
+              label="Arbetsökandes Styrkor och Förbättringsmöjligheter"
               maxLength={1900}
               height="h-60"
               disabled={!isProposed}
@@ -100,7 +100,7 @@ export default function Form({ plan, occupations }: Props) {
               infoText={infoText}
             />
             <TextArea
-              label="Arbetsökandes Förbättringsmöjligheter"
+              label="Arbetmarkaden och Fokus"
               maxLength={1900}
               height="h-60"
               disabled={!isProposed}
@@ -128,13 +128,13 @@ export default function Form({ plan, occupations }: Props) {
       ) : (
         <>
           <div className="flex flex-col mt-2 lg:w-4/6 pt-8 px-8">
-            <h2 className="text-lg font-semibold">Arbetsökandes Styrkor</h2>
+            <h2 className="text-lg font-semibold">
+              Arbetsökandes Styrkor och Förbättringsmöjligheter
+            </h2>
             <pre className="text-wrap font-sans">{text1}</pre>
           </div>
           <div className="flex flex-col lg:w-4/6 mt-2 px-8">
-            <h2 className="text-lg font-semibold">
-              Arbetsökandes Förbättringsmöjligheter
-            </h2>
+            <h2 className="text-lg font-semibold">Arbetmarkaden och Fokus</h2>
             <pre className="text-wrap font-sans">{text2}</pre>
           </div>
           <div className="flex flex-col lg:w-4/6 mt-2 px-8">

@@ -4,6 +4,7 @@ import { JobInfo } from '../types/types'
 import { createPlan } from '@/db/queries'
 import generateTexts from '../lib/gtp'
 import { redirect } from 'next/navigation'
+import openPositions from '../lib/fetchOpenPositions'
 
 const formSchema = z.object({
   firstName: z.string().min(1).max(50),
@@ -59,12 +60,16 @@ export default async function processFormAction(
     }
   }
 
+  const occupationsWithPositions = await openPositions(
+    validatedFields.data.occupations
+  )
+
   try {
     if (validatedFields.data.assistant) {
       generatedTexts = await generateTexts({
         firstName: validatedFields.data.firstName,
         lastName: validatedFields.data.lastName,
-        occupations: validatedFields.data.occupations,
+        occupations: occupationsWithPositions,
         additionalInformation: validatedFields.data.additionalInfo,
       })
 

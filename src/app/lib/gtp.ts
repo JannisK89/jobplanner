@@ -1,12 +1,12 @@
 import OpenAI from 'openai'
-import { JobInfo } from '../types/types'
+import { JobInfoWithOpenPositions } from '../types/types'
 
 const openai = new OpenAI()
 
 type Data = {
   firstName: string
   lastName: string
-  occupations: JobInfo[]
+  occupations: JobInfoWithOpenPositions[]
   additionalInformation: string
 }
 
@@ -23,8 +23,8 @@ const basePrompt = `
 `
 
 const questions = [
-  'What are the jobseekers strengths for the roles they are seeking?',
-  'What are the jobseekers weaknesses for the roles they are seeking?',
+  'What are the jobseekers strengths and weaknesses for the roles they are seeking?',
+  'What how is the job market looking and what occupations should the jobseeker focus on based on experience, education and open positions?',
   'How can the jobseeker improve their chances of getting a job in the roles they are seeking?',
 ]
 
@@ -47,6 +47,7 @@ async function generateTexts(data: Data) {
             `Title: ${occupation.title}
             Experience: ${occupation.experience}
             Education: ${occupation.education}
+            Open Positions: ${occupation.openPositions}
             `
         )}
         Here is some additional information about me: ${data.additionalInformation}

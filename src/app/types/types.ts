@@ -5,6 +5,8 @@ export type JobInfo = {
   experience: boolean
 }
 
+export type JobInfoWithOpenPositions = JobInfo & { openPositions: number }
+
 export type Plan = {
   firstName: string
   lastName: string

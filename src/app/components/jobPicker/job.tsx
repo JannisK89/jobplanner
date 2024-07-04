@@ -38,7 +38,7 @@ export default function Job({ job, type, clickHandler }: Props) {
     <li className="text-md shadow p-2 hover:bg-gray-200 flex flex-col">
       <div className="flex justify-between">
         <div>
-          <p className="text-ellipsis"> {job.title} </p>
+          <p className="text-ellipsis overflow-hidden max-w-44 ">{job.title}</p>
           {type === 'remove' && (
             <div className="flex font-light text-sm gap-3">
               <div className="flex gap-1 items-center">
