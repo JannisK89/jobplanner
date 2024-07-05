@@ -42,7 +42,7 @@ export default function Job({ job, type, clickHandler }: Props) {
           {type === 'remove' && (
             <div className="flex font-light text-sm gap-3">
               <div className="flex gap-1 items-center">
-                <label>Utbildning</label>
+                <label htmlFor={`edu-${job.title}`}>Utbildning</label>
                 <input
                   type="checkbox"
                   checked={
@@ -52,11 +52,12 @@ export default function Job({ job, type, clickHandler }: Props) {
                   }
                   onChange={changeHandler}
                   name="education"
+                  id={`edu-${job.title}`}
                   disabled={pending}
                 />
               </div>
               <div className="flex gap-1 items-center">
-                <label>Erfarenhet</label>
+                <label htmlFor={`exp-${job.title}`}>Erfarenhet</label>
                 <input
                   type="checkbox"
                   checked={
@@ -66,6 +67,7 @@ export default function Job({ job, type, clickHandler }: Props) {
                   }
                   onChange={changeHandler}
                   name="experience"
+                  id={`exp-${job.title}`}
                   disabled={pending}
                 />
               </div>
