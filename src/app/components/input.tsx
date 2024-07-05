@@ -21,7 +21,9 @@ export default function Input({
   const { pending } = useFormStatus()
   return (
     <div className="md:w-3/4 flex flex-col">
-      <label className="text-base mb-1">{label}</label>
+      <label htmlFor={name} className="text-base mb-1">
+        {label}
+      </label>
       <input
         onChange={onChange}
         value={value}
@@ -32,6 +34,7 @@ export default function Input({
           pending && 'bg-gray-200'
         )}
         name={name}
+        id={name}
         required
         disabled={pending}
       />

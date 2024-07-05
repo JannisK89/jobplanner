@@ -54,6 +54,7 @@ export default function TextArea({
         maxLength={maxLength}
         minLength={minLength}
         name={name}
+        id={name}
         disabled={disabled || pending}
       />
     </div>
