@@ -17,22 +17,25 @@ export class PlanPage {
   }
 
   async assertProposedPlan() {
-    await expect(this.name).toBeVisible({ timeout: 60000 })
+    await expect(this.name).toBeVisible({ timeout: 40000 })
     await expect(this.status).toBeVisible()
     await this.assertOccupations()
   }
 
   private async assertOccupations() {
     for await (const occupation of this.user.occupations) {
+      const education = 'Utbildning: ' + (occupation.education ? 'Ja' : 'Nej')
+      const experience = 'Erfarenhet: ' + (occupation.experience ? 'Ja' : 'Nej')
+      await this.page.pause()
       await expect(
         this.page
           .getByRole('listitem')
           .filter({ hasText: occupation.title })
           .filter({
-            hasText: 'Utbildning: ' + occupation.education ? 'Ja' : 'Nej',
+            hasText: education,
           })
           .filter({
-            hasText: 'Erfarenhet: ' + occupation.experience ? 'Ja' : 'Nej',
+            hasText: experience,
           })
       ).toBeVisible()
     }
