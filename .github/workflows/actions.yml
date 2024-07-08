@@ -7,7 +7,7 @@ on:
 env:
   CI: true
   POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
-  OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
 jobs:
   build:
