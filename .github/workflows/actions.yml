@@ -4,6 +4,11 @@ on:
   push:
     branches: [master, main]
 
+env:
+  CI: true
+  POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+  OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
